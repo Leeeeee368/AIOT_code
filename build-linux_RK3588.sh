@@ -24,4 +24,4 @@ make -j8
 make install
 cd -
 
-cd ./install/AIOT_demo_Linux && ./AIOT_demo
+cd ./install/AIOT_demo_Linux && sudo ./AIOT_demo

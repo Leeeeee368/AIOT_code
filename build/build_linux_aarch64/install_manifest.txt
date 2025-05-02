@@ -1,0 +1,2 @@
+/home/Leee/Src/AIOT_code/install/AIOT_demo_Linux/./AIOT_demo
+/home/Leee/Src/AIOT_code/install/AIOT_demo_Linux/lib/libjson-c.so.5

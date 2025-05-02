@@ -9,8 +9,8 @@ typedef struct {
     uint8_t dev_id;          // 设备号（0x01-0x03）
     float temperature;       // 温度（°C）
     float humidity;          // 湿度（%RH）
-    float co_ppm;  // CO浓度（ppm）
-    float light_lux;   // 光照度（lux）
+    float co_ppm;            // CO浓度（ppm）
+    float light_lux;         // 光照度（lux）
     pthread_mutex_t mutex;   // 数据访问互斥锁
 } SensorData;
 
