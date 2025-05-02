@@ -4,25 +4,25 @@
 #include <stdlib.h>
 
 // 消息接收回调（Paho库回调函数）
-static void message_arrived(MessageData *md) {
-    MQTTClientConfig *config = (MQTTClientConfig *)md->userContext;
-    mqtt_message_callback callback = config->client.callback;
-    void *user_data = config->client.userContext;
+// static void message_arrived(MessageData *md) {
+//     MQTTClientConfig *config = (MQTTClientConfig *)md->userContext;
+//     mqtt_message_callback callback = config->client.callback;
+//     void *user_data = config->client.userContext;
 
-    // 解析JSON数据
-    json_object *json_data = json_tokener_parse((char *)md->message->payload);
-    if (!json_data) {
-        printf("Error parsing JSON message\n");
-        return;
-    }
+//     // 解析JSON数据
+//     json_object *json_data = json_tokener_parse((char *)md->message->payload);
+//     if (!json_data) {
+//         printf("Error parsing JSON message\n");
+//         return;
+//     }
 
-    // 调用用户自定义回调
-    if (callback) {
-        callback(md->topicName, json_data, user_data);
-    }
+//     // 调用用户自定义回调
+//     if (callback) {
+//         callback(md->topicName, json_data, user_data);
+//     }
 
-    json_object_put(json_data);
-}
+//     json_object_put(json_data);
+// }
 
 // 初始化MQTT客户端
 int mqtt_client_init(MQTTClientConfig *config) {
@@ -56,7 +56,7 @@ int mqtt_client_connect(MQTTClientConfig *config) {
     conn_opts.password = config->password;
 
     // 设置消息回调
-    MQTTClient_setCallbacks(config->client, config, NULL, message_arrived, NULL);
+    // MQTTClient_setCallbacks(config->client, config, NULL, message_arrived, NULL);
 
     int rc = MQTTClient_connect(config->client, &conn_opts);
     if (rc != MQTTCLIENT_SUCCESS) {
@@ -81,22 +81,20 @@ int mqtt_client_subscribe(MQTTClientConfig *config, const char *topic, int qos) 
 }
 
 // 发布JSON数据
-int mqtt_client_publish_json(MQTTClientConfig *config, const char *topic, json_object *json_data, int qos) {
-    char *json_str = json_object_to_json_string(json_data);
+int mqtt_client_publish_json(MQTTClientConfig *config, const char *topic, char *json_data, int qos) {
     MQTTClient_message msg = MQTTClient_message_initializer;
-    msg.payload = json_str;
-    msg.payloadlen = strlen(json_str);
+    msg.payload = json_data;
+    msg.payloadlen = strlen(json_data);
     msg.qos = qos;
     msg.retained = 0;
 
     MQTTClient_deliveryToken token;
     int rc = MQTTClient_publishMessage(config->client, topic, &msg, &token);
-    free(json_str); // 释放JSON字符串内存
     return rc;
 }
 
 // 设置消息回调函数
-void mqtt_client_set_message_callback(MQTTClientConfig *config, mqtt_message_callback callback, void *user_data) {
-    config->client.callback = callback;
-    config->client.userContext = user_data;
-}
+// void mqtt_client_set_message_callback(MQTTClientConfig *config, mqtt_message_callback callback, void *user_data) {
+//     config->client.callback = callback;
+//     config->client.userContext = user_data;
+// }

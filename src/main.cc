@@ -62,8 +62,9 @@ int main(int argc, char **argv) {
         send_data(send_cmd);
         json_data = pack_sensor_to_json();
         printf("json_data%s\n",json_data);
-        mqtt_client_publish_json(&config, topic, json_data, 0);
-        MQTTClient_yield(config.client, 100); // 处理网络事件
+        if(mqtt_client_publish_json(&config, topic, json_data, 0) == 0)
+            printf("mqtt_send_json is success\n");
+        // MQTTClient_yield(config.client, 100); // 处理网络事件
         // write(fd, send_cmd, 8);
         sleep(1); // 每秒发送一次
     }

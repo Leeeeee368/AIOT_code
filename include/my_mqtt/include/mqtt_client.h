@@ -1,7 +1,7 @@
 #ifndef _MQTT_CLIENT_H_
 #define _MQTT_CLIENT_H_
 
-#include "mqtt3c.h"
+#include "MQTTClient.h"
 #include "json.h"
 
 #define MQTT_DEFAULT_PORT 1883
@@ -35,9 +35,9 @@ void mqtt_client_disconnect(MQTTClientConfig *config);
 int mqtt_client_subscribe(MQTTClientConfig *config, const char *topic, int qos);
 
 // 发布JSON数据到主题
-int mqtt_client_publish_json(MQTTClientConfig *config, const char *topic, json_object *json_data, int qos);
+int mqtt_client_publish_json(MQTTClientConfig *config, const char *topic, char *json_data, int qos);
 
 // 设置消息回调函数
-void mqtt_client_set_message_callback(MQTTClientConfig *config, mqtt_message_callback callback, void *user_data);
+// void mqtt_client_set_message_callback(MQTTClientConfig *config, mqtt_message_callback callback, void *user_data);
 
 #endif

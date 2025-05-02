@@ -17,6 +17,12 @@ CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.o: ../../include/jso
 CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.o: ../../include/json-c/include/linkhash.h
 CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.o: ../../include/json-c/include/printbuf.h
 CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.o: ../../include/my_mqtt/include/mqtt_client.h
+CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.o: ../../include/paho_mqtt/include/MQTTClient.h
+CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.o: ../../include/paho_mqtt/include/MQTTClientPersistence.h
+CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.o: ../../include/paho_mqtt/include/MQTTExportDeclarations.h
+CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.o: ../../include/paho_mqtt/include/MQTTProperties.h
+CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.o: ../../include/paho_mqtt/include/MQTTReasonCodes.h
+CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.o: ../../include/paho_mqtt/include/MQTTSubscribeOpts.h
 CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.o: ../../include/my_mqtt/src/mqtt_client.cc
 
 CMakeFiles/AIOT_demo.dir/include/rs485/src/RS485.cc.o: ../../include/json-c/include/arraylist.h
@@ -73,6 +79,12 @@ CMakeFiles/AIOT_demo.dir/src/main.cc.o: ../../include/json-c/include/json_util.h
 CMakeFiles/AIOT_demo.dir/src/main.cc.o: ../../include/json-c/include/linkhash.h
 CMakeFiles/AIOT_demo.dir/src/main.cc.o: ../../include/json-c/include/printbuf.h
 CMakeFiles/AIOT_demo.dir/src/main.cc.o: ../../include/my_mqtt/include/mqtt_client.h
+CMakeFiles/AIOT_demo.dir/src/main.cc.o: ../../include/paho_mqtt/include/MQTTClient.h
+CMakeFiles/AIOT_demo.dir/src/main.cc.o: ../../include/paho_mqtt/include/MQTTClientPersistence.h
+CMakeFiles/AIOT_demo.dir/src/main.cc.o: ../../include/paho_mqtt/include/MQTTExportDeclarations.h
+CMakeFiles/AIOT_demo.dir/src/main.cc.o: ../../include/paho_mqtt/include/MQTTProperties.h
+CMakeFiles/AIOT_demo.dir/src/main.cc.o: ../../include/paho_mqtt/include/MQTTReasonCodes.h
+CMakeFiles/AIOT_demo.dir/src/main.cc.o: ../../include/paho_mqtt/include/MQTTSubscribeOpts.h
 CMakeFiles/AIOT_demo.dir/src/main.cc.o: ../../include/rs485/include/RS485.h
 CMakeFiles/AIOT_demo.dir/src/main.cc.o: ../../include/sensor/include/sensor.h
 CMakeFiles/AIOT_demo.dir/src/main.cc.o: ../../src/main.cc

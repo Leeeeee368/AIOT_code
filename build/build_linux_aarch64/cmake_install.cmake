@@ -1,8 +1,8 @@
-# Install script for directory: /home/Leee/Src/AIOT_code
+# Install script for directory: /home/cat/work/AIOT/AIOT_code
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/Leee/Src/AIOT_code/install/AIOT_demo_Linux")
+  set(CMAKE_INSTALL_PREFIX "/home/cat/work/AIOT/AIOT_code/install/AIOT_demo_Linux")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,17 +38,13 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/." TYPE EXECUTABLE FILES "/home/Leee/Src/AIOT_code/build/build_linux_aarch64/AIOT_demo")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/." TYPE EXECUTABLE FILES "/home/cat/work/AIOT/AIOT_code/build/build_linux_aarch64/AIOT_demo")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/./AIOT_demo" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/./AIOT_demo")
     if(CMAKE_INSTALL_DO_STRIP)
       execute_process(COMMAND "/usr/bin/aarch64-linux-gnu-strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/./AIOT_demo")
     endif()
   endif()
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE PROGRAM FILES "/home/Leee/Src/AIOT_code/include/json-c/lib/libjson-c.so.5")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -59,5 +55,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/Leee/Src/AIOT_code/build/build_linux_aarch64/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/cat/work/AIOT/AIOT_code/build/build_linux_aarch64/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

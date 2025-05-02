@@ -6,5 +6,5 @@ CXX_FLAGS = -pthread -g -O0   -std=c++17
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/Leee/Src/AIOT_code/include -I/home/Leee/Src/AIOT_code/include/json-c/include -I/home/Leee/Src/AIOT_code/include/sensor/include -I/home/Leee/Src/AIOT_code/include/rs485/include -I/home/Leee/Src/AIOT_code/include/my_mqtt/include 
+CXX_INCLUDES = -I/home/cat/work/AIOT/AIOT_code/include -I/home/cat/work/AIOT/AIOT_code/include/json-c/include -I/home/cat/work/AIOT/AIOT_code/include/paho_mqtt/include -I/home/cat/work/AIOT/AIOT_code/include/sensor/include -I/home/cat/work/AIOT/AIOT_code/include/rs485/include -I/home/cat/work/AIOT/AIOT_code/include/my_mqtt/include 
 

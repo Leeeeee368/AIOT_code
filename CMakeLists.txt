@@ -42,7 +42,7 @@ set(Json_c_LIB ${Json_c_PATH}/lib/libjson-c.so.5)
 
 # 查找paho_mqtt库
 set(paho_mqtt_PATH ${CMAKE_SOURCE_DIR}/include/paho_mqtt)
-set(paho_mqtt_LIB ${Json_c_PATH}/lib/libpaho-mqtt3c)
+set(paho_mqtt_LIB ${paho_mqtt_PATH}/lib/libpaho-mqtt3c.so)
 
 # 查找sensor库
 set(sensor_PATH ${CMAKE_SOURCE_DIR}/include/sensor)
@@ -90,6 +90,6 @@ target_link_libraries(AIOT_demo
 # install target and libraries
 set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/install/AIOT_demo_${CMAKE_SYSTEM_NAME})
 install(TARGETS AIOT_demo DESTINATION ./)
-install(PROGRAMS ${Json_c_LIB} DESTINATION lib)
+# install(PROGRAMS ${Json_c_LIB} DESTINATION lib)
 # install(PROGRAMS ${SDL2_TTF_LIB} DESTINATION lib)
 # install(FILES ${SDL2_TTF_PATH}/fonts/simkai.ttf DESTINATION ./)

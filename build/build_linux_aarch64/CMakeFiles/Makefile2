@@ -44,10 +44,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/Leee/Src/AIOT_code
+CMAKE_SOURCE_DIR = /home/cat/work/AIOT/AIOT_code
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/Leee/Src/AIOT_code/build/build_linux_aarch64
+CMAKE_BINARY_DIR = /home/cat/work/AIOT/AIOT_code/build/build_linux_aarch64
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -74,14 +74,14 @@ clean: CMakeFiles/AIOT_demo.dir/clean
 CMakeFiles/AIOT_demo.dir/all:
 	$(MAKE) -f CMakeFiles/AIOT_demo.dir/build.make CMakeFiles/AIOT_demo.dir/depend
 	$(MAKE) -f CMakeFiles/AIOT_demo.dir/build.make CMakeFiles/AIOT_demo.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/Leee/Src/AIOT_code/build/build_linux_aarch64/CMakeFiles --progress-num=1,2,3,4,5 "Built target AIOT_demo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cat/work/AIOT/AIOT_code/build/build_linux_aarch64/CMakeFiles --progress-num=1,2,3,4,5 "Built target AIOT_demo"
 .PHONY : CMakeFiles/AIOT_demo.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/AIOT_demo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/Leee/Src/AIOT_code/build/build_linux_aarch64/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cat/work/AIOT/AIOT_code/build/build_linux_aarch64/CMakeFiles 5
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/AIOT_demo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/Leee/Src/AIOT_code/build/build_linux_aarch64/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cat/work/AIOT/AIOT_code/build/build_linux_aarch64/CMakeFiles 0
 .PHONY : CMakeFiles/AIOT_demo.dir/rule
 
 # Convenience name for target.

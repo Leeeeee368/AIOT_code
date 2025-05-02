@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/Leee/Src/AIOT_code
+CMAKE_SOURCE_DIR = /home/cat/work/AIOT/AIOT_code
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/Leee/Src/AIOT_code/build/build_linux_aarch64
+CMAKE_BINARY_DIR = /home/cat/work/AIOT/AIOT_code/build/build_linux_aarch64
 
 # Include any dependencies generated for this target.
 include CMakeFiles/AIOT_demo.dir/depend.make
@@ -59,55 +59,55 @@ include CMakeFiles/AIOT_demo.dir/flags.make
 
 CMakeFiles/AIOT_demo.dir/src/main.cc.o: CMakeFiles/AIOT_demo.dir/flags.make
 CMakeFiles/AIOT_demo.dir/src/main.cc.o: ../../src/main.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/Leee/Src/AIOT_code/build/build_linux_aarch64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/AIOT_demo.dir/src/main.cc.o"
-	/usr/bin/aarch64-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/AIOT_demo.dir/src/main.cc.o -c /home/Leee/Src/AIOT_code/src/main.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/work/AIOT/AIOT_code/build/build_linux_aarch64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/AIOT_demo.dir/src/main.cc.o"
+	/usr/bin/aarch64-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/AIOT_demo.dir/src/main.cc.o -c /home/cat/work/AIOT/AIOT_code/src/main.cc
 
 CMakeFiles/AIOT_demo.dir/src/main.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AIOT_demo.dir/src/main.cc.i"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/Leee/Src/AIOT_code/src/main.cc > CMakeFiles/AIOT_demo.dir/src/main.cc.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cat/work/AIOT/AIOT_code/src/main.cc > CMakeFiles/AIOT_demo.dir/src/main.cc.i
 
 CMakeFiles/AIOT_demo.dir/src/main.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AIOT_demo.dir/src/main.cc.s"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/Leee/Src/AIOT_code/src/main.cc -o CMakeFiles/AIOT_demo.dir/src/main.cc.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cat/work/AIOT/AIOT_code/src/main.cc -o CMakeFiles/AIOT_demo.dir/src/main.cc.s
 
 CMakeFiles/AIOT_demo.dir/include/sensor/src/sensor.cc.o: CMakeFiles/AIOT_demo.dir/flags.make
 CMakeFiles/AIOT_demo.dir/include/sensor/src/sensor.cc.o: ../../include/sensor/src/sensor.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/Leee/Src/AIOT_code/build/build_linux_aarch64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/AIOT_demo.dir/include/sensor/src/sensor.cc.o"
-	/usr/bin/aarch64-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/AIOT_demo.dir/include/sensor/src/sensor.cc.o -c /home/Leee/Src/AIOT_code/include/sensor/src/sensor.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/work/AIOT/AIOT_code/build/build_linux_aarch64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/AIOT_demo.dir/include/sensor/src/sensor.cc.o"
+	/usr/bin/aarch64-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/AIOT_demo.dir/include/sensor/src/sensor.cc.o -c /home/cat/work/AIOT/AIOT_code/include/sensor/src/sensor.cc
 
 CMakeFiles/AIOT_demo.dir/include/sensor/src/sensor.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AIOT_demo.dir/include/sensor/src/sensor.cc.i"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/Leee/Src/AIOT_code/include/sensor/src/sensor.cc > CMakeFiles/AIOT_demo.dir/include/sensor/src/sensor.cc.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cat/work/AIOT/AIOT_code/include/sensor/src/sensor.cc > CMakeFiles/AIOT_demo.dir/include/sensor/src/sensor.cc.i
 
 CMakeFiles/AIOT_demo.dir/include/sensor/src/sensor.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AIOT_demo.dir/include/sensor/src/sensor.cc.s"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/Leee/Src/AIOT_code/include/sensor/src/sensor.cc -o CMakeFiles/AIOT_demo.dir/include/sensor/src/sensor.cc.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cat/work/AIOT/AIOT_code/include/sensor/src/sensor.cc -o CMakeFiles/AIOT_demo.dir/include/sensor/src/sensor.cc.s
 
 CMakeFiles/AIOT_demo.dir/include/rs485/src/RS485.cc.o: CMakeFiles/AIOT_demo.dir/flags.make
 CMakeFiles/AIOT_demo.dir/include/rs485/src/RS485.cc.o: ../../include/rs485/src/RS485.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/Leee/Src/AIOT_code/build/build_linux_aarch64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/AIOT_demo.dir/include/rs485/src/RS485.cc.o"
-	/usr/bin/aarch64-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/AIOT_demo.dir/include/rs485/src/RS485.cc.o -c /home/Leee/Src/AIOT_code/include/rs485/src/RS485.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/work/AIOT/AIOT_code/build/build_linux_aarch64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/AIOT_demo.dir/include/rs485/src/RS485.cc.o"
+	/usr/bin/aarch64-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/AIOT_demo.dir/include/rs485/src/RS485.cc.o -c /home/cat/work/AIOT/AIOT_code/include/rs485/src/RS485.cc
 
 CMakeFiles/AIOT_demo.dir/include/rs485/src/RS485.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AIOT_demo.dir/include/rs485/src/RS485.cc.i"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/Leee/Src/AIOT_code/include/rs485/src/RS485.cc > CMakeFiles/AIOT_demo.dir/include/rs485/src/RS485.cc.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cat/work/AIOT/AIOT_code/include/rs485/src/RS485.cc > CMakeFiles/AIOT_demo.dir/include/rs485/src/RS485.cc.i
 
 CMakeFiles/AIOT_demo.dir/include/rs485/src/RS485.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AIOT_demo.dir/include/rs485/src/RS485.cc.s"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/Leee/Src/AIOT_code/include/rs485/src/RS485.cc -o CMakeFiles/AIOT_demo.dir/include/rs485/src/RS485.cc.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cat/work/AIOT/AIOT_code/include/rs485/src/RS485.cc -o CMakeFiles/AIOT_demo.dir/include/rs485/src/RS485.cc.s
 
 CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.o: CMakeFiles/AIOT_demo.dir/flags.make
 CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.o: ../../include/my_mqtt/src/mqtt_client.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/Leee/Src/AIOT_code/build/build_linux_aarch64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.o"
-	/usr/bin/aarch64-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.o -c /home/Leee/Src/AIOT_code/include/my_mqtt/src/mqtt_client.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/work/AIOT/AIOT_code/build/build_linux_aarch64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.o"
+	/usr/bin/aarch64-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.o -c /home/cat/work/AIOT/AIOT_code/include/my_mqtt/src/mqtt_client.cc
 
 CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.i"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/Leee/Src/AIOT_code/include/my_mqtt/src/mqtt_client.cc > CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cat/work/AIOT/AIOT_code/include/my_mqtt/src/mqtt_client.cc > CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.i
 
 CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.s"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/Leee/Src/AIOT_code/include/my_mqtt/src/mqtt_client.cc -o CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cat/work/AIOT/AIOT_code/include/my_mqtt/src/mqtt_client.cc -o CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.s
 
 # Object files for target AIOT_demo
 AIOT_demo_OBJECTS = \
@@ -125,8 +125,9 @@ AIOT_demo: CMakeFiles/AIOT_demo.dir/include/rs485/src/RS485.cc.o
 AIOT_demo: CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.o
 AIOT_demo: CMakeFiles/AIOT_demo.dir/build.make
 AIOT_demo: ../../include/json-c/lib/libjson-c.so.5
+AIOT_demo: ../../include/paho_mqtt/lib/libpaho-mqtt3c.so
 AIOT_demo: CMakeFiles/AIOT_demo.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/Leee/Src/AIOT_code/build/build_linux_aarch64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable AIOT_demo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/cat/work/AIOT/AIOT_code/build/build_linux_aarch64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable AIOT_demo"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AIOT_demo.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -139,6 +140,6 @@ CMakeFiles/AIOT_demo.dir/clean:
 .PHONY : CMakeFiles/AIOT_demo.dir/clean
 
 CMakeFiles/AIOT_demo.dir/depend:
-	cd /home/Leee/Src/AIOT_code/build/build_linux_aarch64 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/Leee/Src/AIOT_code /home/Leee/Src/AIOT_code /home/Leee/Src/AIOT_code/build/build_linux_aarch64 /home/Leee/Src/AIOT_code/build/build_linux_aarch64 /home/Leee/Src/AIOT_code/build/build_linux_aarch64/CMakeFiles/AIOT_demo.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/cat/work/AIOT/AIOT_code/build/build_linux_aarch64 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/cat/work/AIOT/AIOT_code /home/cat/work/AIOT/AIOT_code /home/cat/work/AIOT/AIOT_code/build/build_linux_aarch64 /home/cat/work/AIOT/AIOT_code/build/build_linux_aarch64 /home/cat/work/AIOT/AIOT_code/build/build_linux_aarch64/CMakeFiles/AIOT_demo.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/AIOT_demo.dir/depend
 
