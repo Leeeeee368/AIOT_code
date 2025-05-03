@@ -23,6 +23,16 @@ void sensor_data_init(void) {
     pthread_mutex_init(&sensor_data.mutex, NULL);
 }
 
+/* 发送数据 */
+void send_data(char *data) {
+    pthread_mutex_lock(&rs485_mutex);
+    set_rs485_mode(1);
+    write(fd, data, 8);
+    usleep(10000);
+    set_rs485_mode(0);
+    pthread_mutex_unlock(&rs485_mutex);
+}
+
 // 线程安全的JSON打包函数
 char* pack_sensor_to_json(void) {
     static char json_buf[256];  // 线程安全的局部缓冲区
@@ -53,46 +63,66 @@ char* pack_sensor_to_json(void) {
     return json_buf;
 }
 
-// 设备01处理函数（温湿度解析）
+/**
+ * @brief 设备 01 处理函数（温湿度解析）。
+ * @details 解析设备 01 发送的温湿度数据，并更新传感器数据结构体。
+ * @param data 接收到的设备 01 数据指针。
+ * @param len 接收到的数据长度。
+ */
+// eg. 01 03 04 02 A6 00 EA 9A 27
 static void handle_device_01(const uint8_t *data, uint16_t len) {
     if (len < 4) return;
 
     // 提取数据（大端模式：高字节在前）
-    uint16_t humidity_raw = (data[0] << 8) | data[1];
-    uint16_t temp_raw = (data[2] << 8) | data[3];
+    uint16_t humidity_raw   = (data[0] << 8) | data[1];
+    uint16_t temp_raw       = (data[2] << 8) | data[3];
 
     // 单位转换（假设湿度/温度单位为0.1%RH/0.1°C）
     pthread_mutex_lock(&sensor_data.mutex);
-    sensor_data.humidity = (float)humidity_raw / 10.0;
+    sensor_data.humidity    = (float)humidity_raw / 10.0;
     sensor_data.temperature = (float)temp_raw / 10.0;
     pthread_mutex_unlock(&sensor_data.mutex);
 }
 
-// 设备02处理函数（CO浓度解析）
+/**
+ * @brief 设备 02 处理函数（CO 浓度解析）。
+ * @details 解析设备 02 发送的 CO 浓度数据，并更新传感器数据结构体。
+ * @param data 接收到的设备 02 数据指针。
+ * @param len 接收到的数据长度。
+ */
+// eg. 02 03 04 02 A6 00 EA A9 27
 static void handle_device_02(const uint8_t *data, uint16_t len) {
     if (len < 2) return;
-    uint16_t co_raw = (data[0] << 8) | data[1];
+    uint16_t co_raw         = (data[0] << 8) | data[1];
+    uint16_t co_per_raw     = (data[2] << 8) | data[3];
     pthread_mutex_lock(&sensor_data.mutex);
-    sensor_data.co_ppm = (float)co_raw * 0.1;
+    sensor_data.co_ppm      = (float)co_raw;
+    sensor_data.co_per      = (float)co_per_raw * 0.1;
     pthread_mutex_unlock(&sensor_data.mutex);
 }
 
-// 设备03处理函数（光照度解析）
+/**
+ * @brief 设备 03 处理函数（光照度解析）。
+ * @details 解析设备 03 发送的光照度数据，并更新传感器数据结构体。
+ * @param data 接收到的设备 03 数据指针。
+ * @param len 接收到的数据长度。
+ */
+// eg. 03 03 02 04 DD 03 1D
 static void handle_device_03(const uint8_t *data, uint16_t len) {
     if (len < 2) return;
-    uint16_t light_raw = (data[0] << 8) | data[1];
+    uint16_t light_raw      = (data[0] << 8) | data[1];
     pthread_mutex_lock(&sensor_data.mutex);
-    sensor_data.light_lux = (float)light_raw * 0.1;
+    sensor_data.light_lux   = (float)light_raw;
     pthread_mutex_unlock(&sensor_data.mutex);
 }
 
 // 通用设备处理分发
 void handle_sensor_data(const uint8_t *data, uint16_t len) {
-    uint8_t dev_id = data[0];          // 设备号（索引0）
-    uint8_t func_code = data[1];       // 功能码（索引1）
-    uint8_t data_len_field = data[2];  // 数据长度字段（索引2，如0x04表示4字节有效数据）
-    const uint8_t *payload = data + 3;  // 有效数据从索引3开始
-    uint16_t payload_len = data_len_field; // 直接使用数据长度字段，而非计算len-5（更可靠）
+    uint8_t dev_id          = data[0];                  // 设备号（索引0）
+    uint8_t func_code       = data[1];                  // 功能码（索引1）
+    uint8_t data_len_field  = data[2];                  // 数据长度字段（索引2，如0x04表示4字节有效数据）
+    const uint8_t *payload  = data + 3;                 // 有效数据从索引3开始
+    uint16_t payload_len    = data_len_field;           // 直接使用数据长度字段
 
     switch (dev_id) {
         case 0x01:
@@ -110,14 +140,4 @@ void handle_sensor_data(const uint8_t *data, uint16_t len) {
         default:
             printf("未知设备号: 0x%02X\n", dev_id);
     }
-}
-
-/* 发送数据 */
-void send_data(char *data) {
-    pthread_mutex_lock(&rs485_mutex);
-    set_rs485_mode(1);
-    write(fd, data, 8);
-    usleep(10000);
-    set_rs485_mode(0);
-    pthread_mutex_unlock(&rs485_mutex);
 }

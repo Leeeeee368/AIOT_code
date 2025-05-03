@@ -1,28 +1,11 @@
 #include "mqtt_client.h"
+#include "RS485.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
-// 消息接收回调（Paho库回调函数）
-// static void message_arrived(MessageData *md) {
-//     MQTTClientConfig *config = (MQTTClientConfig *)md->userContext;
-//     mqtt_message_callback callback = config->client.callback;
-//     void *user_data = config->client.userContext;
-
-//     // 解析JSON数据
-//     json_object *json_data = json_tokener_parse((char *)md->message->payload);
-//     if (!json_data) {
-//         printf("Error parsing JSON message\n");
-//         return;
-//     }
-
-//     // 调用用户自定义回调
-//     if (callback) {
-//         callback(md->topicName, json_data, user_data);
-//     }
-
-//     json_object_put(json_data);
-// }
+// 全局回调函数指针
+static MQTTMessageCallback user_callback = NULL;
 
 // 初始化MQTT客户端
 int mqtt_client_init(MQTTClientConfig *config) {
@@ -80,6 +63,34 @@ int mqtt_client_subscribe(MQTTClientConfig *config, const char *topic, int qos) 
     return rc;
 }
 
+// Paho库要求的消息到达回调
+static int message_arrived(void *context, char *topicName, int topicLen, MQTTClient_message *message) {
+    MQTTClientConfig *config = (MQTTClientConfig *)context;  // 从上下文中获取配置
+    json_object *json_msg = NULL;
+    const char *payload = (char *)message->payload;
+
+    if (user_callback && payload) {
+        json_msg = json_tokener_parse(payload);
+        if (json_msg) {
+            // 传递 topicName 和 json_msg 到用户回调
+            user_callback(topicName, json_msg);
+            json_object_put(json_msg);
+        } else {
+            fprintf(stderr, "JSON解析失败: %.*s\n", (int)message->payloadlen, payload);
+            return 1;  // 提前返回，避免调用空回调
+        }
+    }
+    MQTTClient_free(topicName);
+    MQTTClient_freeMessage(&message);
+    return 1;
+}
+
+// 设置用户自定义回调
+void mqtt_client_set_callback(MQTTClientConfig *config, MQTTMessageCallback callback) {
+    user_callback = callback;
+    MQTTClient_setCallbacks(config->client, config, NULL, message_arrived, NULL);
+}
+
 // 发布JSON数据
 int mqtt_client_publish_json(MQTTClientConfig *config, const char *topic, char *json_data, int qos) {
     MQTTClient_message msg = MQTTClient_message_initializer;
@@ -93,8 +104,32 @@ int mqtt_client_publish_json(MQTTClientConfig *config, const char *topic, char *
     return rc;
 }
 
-// 设置消息回调函数
-// void mqtt_client_set_message_callback(MQTTClientConfig *config, mqtt_message_callback callback, void *user_data) {
-//     config->client.callback = callback;
-//     config->client.userContext = user_data;
-// }
+void print_received_message(const char* topic, json_object* json_msg) {
+    printf("\n=== 收到MQTT消息 ===\n");
+    printf("主题: %s\n", topic);
+    printf("原始JSON: %s\n", json_object_to_json_string(json_msg));
+
+    // 解析JSON字段并执行对应操作
+    json_object *value;
+
+    /* 灯光控制 */
+    if (json_object_object_get_ex(json_msg, "Light", &value)) {
+        const char* state = json_object_get_string(value);
+        if (strcmp(state, "open") == 0) {
+            light_control(ON);  // 开灯
+        } else if (strcmp(state, "close") == 0) {
+            light_control(OFF); // 关灯
+        }
+    }
+
+    /* 窗户控制 */
+    if (json_object_object_get_ex(json_msg, "Window", &value)) {
+        const char* state = json_object_get_string(value);
+        if (strcmp(state, "open") == 0) {
+            window_control(ON);  // 开窗
+        } else if (strcmp(state, "close") == 0) {
+            window_control(OFF); // 关窗
+        }
+    }
+    printf("==================\n");
+}

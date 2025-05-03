@@ -24,6 +24,7 @@ CMakeFiles/AIOT_demo.dir/include/my_mqtt/src/mqtt_client.cc.o
  ../../include/paho_mqtt/include/MQTTProperties.h
  ../../include/paho_mqtt/include/MQTTReasonCodes.h
  ../../include/paho_mqtt/include/MQTTSubscribeOpts.h
+ ../../include/rs485/include/RS485.h
  /home/cat/work/AIOT/AIOT_code/include/my_mqtt/src/mqtt_client.cc
 CMakeFiles/AIOT_demo.dir/include/rs485/src/RS485.cc.o
  ../../include/json-c/include/arraylist.h

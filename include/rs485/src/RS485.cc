@@ -5,6 +5,27 @@
 int fd;
 pthread_mutex_t rs485_mutex = PTHREAD_MUTEX_INITIALIZER;
 
+//继电器
+char relay_1[2][8] = {
+	{0x04, 0x05, 0x00, 0x10, 0xFF, 0x00, 0x8D, 0xAA},	//继电器1的1路开
+	{0x04, 0x05, 0x00, 0x10, 0x00, 0x00, 0xCC, 0x5A},	//继电器1关1路关
+};
+
+char relay_2[2][8] = {
+	{0x04, 0x05, 0x00, 0x11, 0xFF, 0x00, 0xDC, 0x6A},	//继电器1开2路开
+	{0x04, 0x05, 0x00, 0x11, 0x00, 0x00, 0x9D, 0x9A}	//继电器1开2路关
+};
+
+char relay_3[2][8] = {
+	{0x05, 0x05, 0x00, 0x10, 0xFF, 0x00, 0x8C, 0x7B},	//继电器2的1路开
+	{0x05, 0x05, 0x00, 0x10, 0x00, 0x00, 0xCD, 0x8B}	//继电器2的1路关
+};
+
+char relay_4[2][8] = {
+	{0x05, 0x05, 0x00, 0x11, 0xFF, 0x00, 0xDD, 0xBB},	//继电器2开2路开
+	{0x05, 0x05, 0x00, 0x11, 0x00, 0x00, 0x9C, 0x4B}	//继电器2开2路关
+};
+
 /* RS485模式配置 */
 void set_rs485_mode(int enable_tx) {
     struct serial_rs485 rs485_conf = {0};
@@ -104,48 +125,82 @@ static void str_to_float(const char *str_sd, const char *str_wd, float *sd, floa
 // 在 rs485.c 或主程序中
 void *rs485_recv_thread(void *arg) {
     RS485_Frame frame;
-    char rev_data[9] = {0x01, 0x03, 0x04, 0x02, 0xA6, 0x00, 0xEA, 0x27, 0x9A};
+    // char rev_data[9] = {0x01, 0x03, 0x04, 0x02, 0xA6, 0x00, 0xEA, 0x27, 0x9A};
     char str[100] = {0};
-    // memset(rev_data, 0, sizeof(rev_data));
+    memset(frame.raw_data, 0, sizeof(MAX_FRAME_LEN));
     char Json_str_rev[256] = {0};
     while (1) {
+        memset(frame.raw_data, 0, MAX_FRAME_LEN);
         // 读取完整数据帧（含CRC校验）
         usleep(1000000);
-        int len = 9;
-        // int len = read(fd, frame.raw_data, sizeof(frame.raw_data));
-        // int len = read(fd, rev_data, 9);
+        int len = read(fd, frame.raw_data, MAX_FRAME_LEN);
         printf("working\n");
         if (len < 5) {
             printf("no rev--%d\n",len);
             for(int i = 0; i < 9; i++){
-					sprintf(str + i*2, "%02x", rev_data[i]);//i*2”是因为每个字符需要2个字符的空间来存储16进制数（格式化）。
+					sprintf(str + i*2, "%02x", frame.raw_data[i]);//i*2”是因为每个字符需要2个字符的空间来存储16进制数（格式化）。
 				}
 			printf("%s\n", str);
             // usleep(100000); // 调整睡眠周期
             continue;  // 至少需要设备号+功能码+数据+2字节CRC
         }
-        for(int i = 0; i < 9; i++){
-				sprintf(str + i*2, "%02x", rev_data[i]);//i*2”是因为每个字符需要2个字符的空间来存储16进制数（格式化）。
+        for(int i = 0; i < len; i++){
+				sprintf(str + i*2, "%02x", frame.raw_data[i]);//i*2”是因为每个字符需要2个字符的空间来存储16进制数（格式化）。
 			}
 		printf("%s\n", str);
         printf("********************\n");
         // 在接收线程中添加调试打印（确认数据接收）
-        hex_to_string(rev_data, len, Json_str_rev); // 恢复被注释的打印
-        // hex_to_string((char*)frame.raw_data, len, Json_str_rev); // 打印原始16进制数据
-        // frame.frame_len = len;
+        hex_to_string((char *)frame.raw_data, len, Json_str_rev); // 恢复被注释的打印
+
         // CRC校验（假设frame.raw_data包含完整数据帧）
-        uint16_t recv_crc = (rev_data[len-2] << 8) | rev_data[len-1];
-        uint16_t calc_crc = crc16_modbus((uint8_t *)rev_data, len-2);
+        uint16_t recv_crc = (frame.raw_data[len-1] << 8) | frame.raw_data[len-2];
+        uint16_t calc_crc = crc16_modbus((uint8_t *)frame.raw_data, len-2);
 
         printf("接收数据长度: %d\n", len);
         printf("CRC接收: 0x%04X 计算: 0x%04X\n", recv_crc, calc_crc);
 
         if (recv_crc == calc_crc) {
             // 数据校验通过，分发设备处理
-            handle_sensor_data((uint8_t *)rev_data, len);
+            handle_sensor_data((uint8_t *)frame.raw_data, len);
         } else {
             printf("CRC校验失败，丢弃数据\n");
         }
     }
     return NULL;
+}
+
+void light_control(int state) {
+    printf("[执行] 灯光状态设置为: %d\n", state);
+    switch (state)
+    {
+        case 0:
+            send_data(relay_1[0]);
+            break;
+
+        case 1:
+            send_data(relay_1[1]);
+            break;
+
+        default:
+            break;
+    }
+    // 这里添加实际硬件控制代码
+}
+
+void window_control(int state) {
+    printf("[执行] 窗户状态设置为: %d\n", state);
+    switch (state)
+    {
+        case 0:
+            send_data(relay_2[0]);
+            break;
+
+        case 1:
+            send_data(relay_2[1]);
+            break;
+
+        default:
+            break;
+    }
+    // 这里添加实际硬件控制代码
 }

@@ -4,11 +4,13 @@
 #include <pthread.h>
 
 int main(int argc, char **argv) {
-    char *server_ip = "127.0.0.1"; // 默认本地IP
-    int port = MQTT_DEFAULT_PORT;
-    const char *topic = "/RK3588S/SENSOR/";
     int opt;
     char * json_data;
+    int port = MQTT_DEFAULT_PORT;
+
+    char *server_ip         = "127.0.0.1"; // 默认本地IP
+    const char *topic       = "/RK3588S/SENSOR/";
+    const char *rev_topic   = "/FARM/CTRL/";
 
     if (argc != 2)
     {
@@ -36,15 +38,25 @@ int main(int argc, char **argv) {
         return 1;
     }
 
+    mqtt_client_set_callback(&config, print_received_message); // 设置回调
+
     // 连接到服务器
     if (mqtt_client_connect(&config) != MQTTCLIENT_SUCCESS) {
         mqtt_client_disconnect(&config);
         return 1;
     }
 
-    // 订阅主题
-    mqtt_client_subscribe(&config, topic, 0);
-
+    // 订阅主题（检查返回值）
+    // if (mqtt_client_subscribe(&config, topic, 0) != MQTTCLIENT_SUCCESS) {
+    //     fprintf(stderr, "订阅主题 %s 失败\n", topic);
+    //     mqtt_client_disconnect(&config);
+    //     return 1;
+    // }
+    if (mqtt_client_subscribe(&config, rev_topic, 0) != MQTTCLIENT_SUCCESS) {
+        fprintf(stderr, "订阅主题 %s 失败\n", rev_topic);
+        mqtt_client_disconnect(&config);
+        return 1;
+    }
     // 保持程序运行以接收消息（阻塞循环）
     printf("MQTT client running. Press Ctrl+C to exit.\n");
 
@@ -62,10 +74,8 @@ int main(int argc, char **argv) {
         send_data(send_cmd);
         json_data = pack_sensor_to_json();
         printf("json_data%s\n",json_data);
-        if(mqtt_client_publish_json(&config, topic, json_data, 0) == 0)
-            printf("mqtt_send_json is success\n");
-        // MQTTClient_yield(config.client, 100); // 处理网络事件
-        // write(fd, send_cmd, 8);
+        if(mqtt_client_publish_json(&config, topic, json_data, 0) != 0)
+            printf("mqtt_send_json is fail!!!\n");
         sleep(1); // 每秒发送一次
     }
 
