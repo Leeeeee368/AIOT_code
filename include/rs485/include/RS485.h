@@ -14,8 +14,8 @@
 #define ON 0
 #define OFF 1
 
-// #define RS485_DEV "/dev/ttyS3"
-#define RS485_DEV "/dev/pts/5"
+#define RS485_DEV "/dev/ttyS1"
+// #define RS485_DEV "/dev/pts/5"
 #define BAUDRATE B4800
 
 // 假设接收到的完整数据帧为：[设备号][功能码][数据长度][数据字段][CRC低][CRC高]

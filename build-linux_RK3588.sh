@@ -24,4 +24,5 @@ make -j8
 make install
 cd -
 
-cd ./install/AIOT_demo_Linux && ./AIOT_demo 192.168.0.200
+# cd ./install/AIOT_demo_Linux && ./AIOT_demo 192.168.0.200
+cd ./install/AIOT_demo_Linux && ./AIOT_demo 192.168.1.196

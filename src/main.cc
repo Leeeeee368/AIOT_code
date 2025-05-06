@@ -3,6 +3,15 @@
 #include "mqtt_client.h"
 #include <pthread.h>
 
+/*DEBUG
+    0 open
+    1 close
+*/
+#ifndef DEBUG
+    #define DEBUG 1
+#endif
+
+
 int main(int argc, char **argv) {
     int opt;
     char * json_data;
@@ -68,15 +77,26 @@ int main(int argc, char **argv) {
     pthread_t recv_tid;
     pthread_create(&recv_tid, NULL, rs485_recv_thread, NULL);
 
-    char send_cmd[8] = {0x02, 0x03, 0x00, 0x00, 0x00, 0x02, 0xC4, 0x38}; // 温湿度查询指令
-
+    char send_cmd[3][8] = {
+        {0x01, 0x03, 0x00, 0x00, 0x00, 0x02, 0xC4, 0x0B},
+        {0x02, 0x03, 0x00, 0x00, 0x00, 0x02, 0xC4, 0x38},
+        {0x03, 0x03, 0x00, 0x00, 0x00, 0x01, 0x85, 0xE8}
+    }; // 温湿度查询指令
+    // char send_cmd[8] = {0x03, 0x03, 0x00, 0x00, 0x00, 0x01, 0x85, 0xE8};
     while (1) {
-        send_data(send_cmd);
+        for(int i=0;i<3;i++)
+        {
+            send_data(send_cmd[i]);
+            sleep(1);
+        }
         json_data = pack_sensor_to_json();
+
+    #if DEBUG == 0
         printf("json_data%s\n",json_data);
+    #endif
+
         if(mqtt_client_publish_json(&config, topic, json_data, 0) != 0)
             printf("mqtt_send_json is fail!!!\n");
-        sleep(1); // 每秒发送一次
     }
 
     close(fd);
