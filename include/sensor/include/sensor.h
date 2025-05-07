@@ -16,11 +16,11 @@
  */
 typedef struct {
     int dev_id;                 /**< 设备号（范围 0x01 - 0x03） */
-    int temperature;            /**< 温度（单位：°C） */
-    int humidity;               /**< 湿度（单位：%RH） */
-    int co_ppm;                 /**< CO 浓度（单位：ppm） */
-    int co_per;                 /**< CO 浓度（单位：ppm） */
-    int light_lux;              /**< 光照度（单位：lux） */
+    double temperature;            /**< 温度（单位：°C） */
+    double humidity;               /**< 湿度（单位：%RH） */
+    double co_ppm;                 /**< CO 浓度（单位：ppm） */
+    double co_per;                 /**< CO 浓度（单位：ppm） */
+    double light_lux;              /**< 光照度（单位：lux） */
     pthread_mutex_t mutex;      /**< 数据访问互斥锁，用于保证线程安全 */
 } SensorData;
 

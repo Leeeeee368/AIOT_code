@@ -55,6 +55,14 @@ void set_rs485_mode(int enable_tx);
 void *rs485_recv_thread(void *arg);
 
 /**
+ * @brief RS485 数据发送线程函数
+ * @details 创建独立线程持续发送读取传感器数据指令
+ * @param arg 线程参数（未使用，置为 NULL）
+ * @return 线程返回值（未使用，置为 NULL）
+ */
+void *rs485_sned_thread(void *arg);
+
+/**
  * @brief 灯光设备控制函数（通过继电器）
  * @details 根据输入状态发送对应的继电器控制指令（16 进制数据帧），实现灯光的开启或关闭。
  * @param state 设备状态：0 表示开启（ON），1 表示关闭（OFF）

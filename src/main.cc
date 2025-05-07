@@ -74,21 +74,16 @@ int main(int argc, char **argv) {
     // 初始化传感器数据对象
     sensor_data_init();
 
-    pthread_t recv_tid;
+    pthread_t recv_tid, send_tid;
     pthread_create(&recv_tid, NULL, rs485_recv_thread, NULL);
-
-    char send_cmd[3][8] = {
-        {0x01, 0x03, 0x00, 0x00, 0x00, 0x02, 0xC4, 0x0B},
-        {0x02, 0x03, 0x00, 0x00, 0x00, 0x02, 0xC4, 0x38},
-        {0x03, 0x03, 0x00, 0x00, 0x00, 0x01, 0x85, 0xE8}
-    }; // 温湿度查询指令
-    // char send_cmd[8] = {0x03, 0x03, 0x00, 0x00, 0x00, 0x01, 0x85, 0xE8};
+    pthread_create(&send_tid, NULL, rs485_sned_thread, NULL);
+    // char send_cmd[3][8] = {
+    //     {0x01, 0x03, 0x00, 0x00, 0x00, 0x02, 0xC4, 0x0B},
+    //     {0x02, 0x03, 0x00, 0x00, 0x00, 0x02, 0xC4, 0x38},
+    //     {0x03, 0x03, 0x00, 0x00, 0x00, 0x01, 0x85, 0xE8}
+    // };
     while (1) {
-        for(int i=0;i<3;i++)
-        {
-            send_data(send_cmd[i]);
-            sleep(1);
-        }
+        usleep(500000);
         json_data = pack_sensor_to_json();
 
     #if DEBUG == 0
@@ -100,6 +95,8 @@ int main(int argc, char **argv) {
     }
 
     close(fd);
+    pthread_join(recv_tid, NULL);
+    pthread_join(send_tid, NULL);
     // 断开连接（实际不会执行到这里，需通过信号处理退出）
     mqtt_client_disconnect(&config);
     return 0;

@@ -79,8 +79,8 @@ static void handle_device_01(const uint8_t *data, uint16_t len) {
 
     // 单位转换（假设湿度/温度单位为0.1%RH/0.1°C）
     pthread_mutex_lock(&sensor_data.mutex);
-    sensor_data.humidity    = (float)humidity_raw / 10.0;
-    sensor_data.temperature = (float)temp_raw / 10.0;
+    sensor_data.humidity    = (double)humidity_raw / 10.0;
+    sensor_data.temperature = (double)temp_raw / 10.0;
     pthread_mutex_unlock(&sensor_data.mutex);
 }
 
@@ -96,8 +96,8 @@ static void handle_device_02(const uint8_t *data, uint16_t len) {
     uint16_t co_raw         = (data[0] << 8) | data[1];
     uint16_t co_per_raw     = (data[2] << 8) | data[3];
     pthread_mutex_lock(&sensor_data.mutex);
-    sensor_data.co_ppm      = (float)co_raw;
-    sensor_data.co_per      = (float)co_per_raw * 0.1;
+    sensor_data.co_ppm      = (double)co_raw;
+    sensor_data.co_per      = (double)co_per_raw * 0.1;
     pthread_mutex_unlock(&sensor_data.mutex);
 }
 
@@ -112,7 +112,7 @@ static void handle_device_03(const uint8_t *data, uint16_t len) {
     if (len < 2) return;
     uint16_t light_raw      = (data[0] << 8) | data[1];
     pthread_mutex_lock(&sensor_data.mutex);
-    sensor_data.light_lux   = (float)light_raw;
+    sensor_data.light_lux   = (double)light_raw;
     pthread_mutex_unlock(&sensor_data.mutex);
 }
 

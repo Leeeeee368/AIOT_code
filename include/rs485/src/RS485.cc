@@ -169,6 +169,23 @@ void *rs485_recv_thread(void *arg) {
     return NULL;
 }
 
+// 在 rs485.c 或主程序中
+void *rs485_sned_thread(void *arg) {
+    char send_cmd[3][8] = {
+        {0x01, 0x03, 0x00, 0x00, 0x00, 0x02, 0xC4, 0x0B},
+        {0x02, 0x03, 0x00, 0x00, 0x00, 0x02, 0xC4, 0x38},
+        {0x03, 0x03, 0x00, 0x00, 0x00, 0x01, 0x85, 0xE8}
+    };
+    while (1) {
+        for(int i=0;i<3;i++)
+        {
+            send_data(send_cmd[i]);
+            sleep(1);
+        }
+    }
+    return NULL;
+}
+
 void light_control(int state) {
     printf("[执行] 灯光状态设置为: %d\n", state);
     switch (state)
