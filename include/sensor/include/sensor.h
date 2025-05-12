@@ -54,6 +54,12 @@ void sensor_data_init(void);
 char* pack_sensor_to_json(void);
 
 /**
+ * @brief 将传感器数据打包成 JSON 字符串(华为云格式)。
+ * @return 包含传感器数据的 JSON 字符串指针。
+ */
+char* pack_sensor_to_huaweicloud(void);
+
+/**
  * @brief 处理接收到的传感器数据。
  * @param data 接收到的传感器数据指针。
  * @param len 接收到的数据长度。

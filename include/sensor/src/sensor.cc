@@ -63,6 +63,45 @@ char* pack_sensor_to_json(void) {
     return json_buf;
 }
 
+// 线程安全的JSON打包函数（华为云格式）
+char* pack_sensor_to_huaweicloud(void) {
+    static char json_buf[256];  // 静态缓冲区保证线程安全
+    pthread_mutex_lock(&sensor_data.mutex);
+
+    // 创建根对象
+    json_object *root = json_object_new_object();
+
+    // 创建services数组（华为云要求格式）
+    json_object *services_array = json_object_new_array();
+
+    // 创建service对象
+    json_object *service_obj = json_object_new_object();
+    json_object_object_add(service_obj, "service_id", json_object_new_string("SensorData"));
+
+    // 创建properties对象
+    json_object *properties = json_object_new_object();
+    json_object_object_add(properties, "DeviceID", json_object_new_int(sensor_data.dev_id));
+    json_object_object_add(properties, "CO", json_object_new_double(sensor_data.co_ppm));
+    json_object_object_add(properties, "Light", json_object_new_double(sensor_data.light_lux));
+    json_object_object_add(properties, "TP", json_object_new_double(sensor_data.humidity));
+    json_object_object_add(properties, "WD", json_object_new_double(sensor_data.temperature));
+
+    // 组装层级结构
+    json_object_object_add(service_obj, "properties", properties);
+    json_object_array_add(services_array, service_obj);
+    json_object_object_add(root, "services", services_array);
+
+    // 生成紧凑型JSON（华为云推荐格式）
+    const char *json_str = json_object_to_json_string_ext(root, JSON_C_TO_STRING_PLAIN);
+    snprintf(json_buf, sizeof(json_buf), "%s", json_str);
+
+    // 清理资源
+    json_object_put(root);
+    pthread_mutex_unlock(&sensor_data.mutex);
+
+    return json_buf;
+}
+
 /**
  * @brief 设备 01 处理函数（温湿度解析）。
  * @details 解析设备 01 发送的温湿度数据，并更新传感器数据结构体。
