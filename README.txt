@@ -29,3 +29,17 @@ cmake .. -DPAHO_WITH_SSL=ON -DPAHO_BUILD_DOCUMENTATION=OFF -DPAHO_BUILD_SAMPLES=
 make
 sudo make install
 sudo ldconfig
+
+使用方法
+
+进入src/main.cc文件，在重定义处选择是否开启华为云，日志打印
+进入./build-linux_RK3588.sh文件
+
+上node-red就留着
+cd ./install/AIOT_demo_Linux && ./AIOT_demo 192.168.1.196
+
+上华为云就留着
+cd ./install/AIOT_demo_Linux && ./AIOT_demo "0aa59c9052.st1.iotda-device.cn-north-4.myhuaweicloud.com"
+
+然后退出，到./build-linux_RK3588.sh同级目录
+终端输入命令：./build-linux_RK3588.sh 程序将自行构建并运行
